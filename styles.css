@@ -246,6 +246,106 @@ body {
     transform: scale(0.98);
 }
 
+/* Touch Controls */
+.touch-controls {
+    display: none;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.dpad {
+    display: grid;
+    grid-template-columns: repeat(3, 60px);
+    grid-template-rows: repeat(3, 60px);
+    gap: 5px;
+}
+
+.dpad-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.dpad-btn:active {
+    background: rgba(78, 205, 196, 0.3);
+    border-color: #4ecdc4;
+    transform: scale(0.95);
+}
+
+.dpad-center {
+    background: transparent;
+    border: none;
+    pointer-events: none;
+}
+
+.dpad-up {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.dpad-left {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.dpad-center {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.dpad-right {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+.dpad-down {
+    grid-column: 2;
+    grid-row: 3;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.action-btn {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.action-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 10px rgba(255, 107, 107, 0.4);
+}
+
 /* Responsive design */
 @media (max-width: 600px) {
     .header h1 {
@@ -286,5 +386,9 @@ body {
     .audio-btn, .genre-select {
         padding: 6px 10px;
         font-size: 0.75rem;
+    }
+
+    .touch-controls {
+        display: flex;
     }
 }

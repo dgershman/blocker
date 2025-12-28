@@ -604,6 +604,90 @@ document.getElementById('genreSelect').addEventListener('change', function() {
     audioManager.setGenre(this.value);
 });
 
+// Touch control buttons
+function setupTouchControls() {
+    const btnLeft = document.getElementById('btnLeft');
+    const btnRight = document.getElementById('btnRight');
+    const btnRotate = document.getElementById('btnRotate');
+    const btnDown = document.getElementById('btnDown');
+    const btnDrop = document.getElementById('btnDrop');
+
+    // Helper for repeat actions (hold to repeat)
+    let repeatInterval = null;
+
+    function startRepeat(action) {
+        if (gameOver) return;
+        action();
+        repeatInterval = setInterval(() => {
+            if (!gameOver) action();
+        }, 100);
+    }
+
+    function stopRepeat() {
+        if (repeatInterval) {
+            clearInterval(repeatInterval);
+            repeatInterval = null;
+        }
+    }
+
+    // Left button
+    btnLeft.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        startRepeat(moveLeft);
+    }, { passive: false });
+    btnLeft.addEventListener('touchend', stopRepeat);
+    btnLeft.addEventListener('touchcancel', stopRepeat);
+
+    // Right button
+    btnRight.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        startRepeat(moveRight);
+    }, { passive: false });
+    btnRight.addEventListener('touchend', stopRepeat);
+    btnRight.addEventListener('touchcancel', stopRepeat);
+
+    // Down button (soft drop)
+    btnDown.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        startRepeat(() => {
+            moveDown();
+            score += 1;
+        });
+    }, { passive: false });
+    btnDown.addEventListener('touchend', stopRepeat);
+    btnDown.addEventListener('touchcancel', stopRepeat);
+
+    // Rotate button (single press)
+    btnRotate.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        if (!gameOver) rotatePiece();
+    }, { passive: false });
+
+    // Drop button (single press)
+    btnDrop.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        if (!gameOver) hardDrop();
+    }, { passive: false });
+
+    // Mouse fallback for testing on desktop
+    btnLeft.addEventListener('mousedown', () => startRepeat(moveLeft));
+    btnLeft.addEventListener('mouseup', stopRepeat);
+    btnLeft.addEventListener('mouseleave', stopRepeat);
+
+    btnRight.addEventListener('mousedown', () => startRepeat(moveRight));
+    btnRight.addEventListener('mouseup', stopRepeat);
+    btnRight.addEventListener('mouseleave', stopRepeat);
+
+    btnDown.addEventListener('mousedown', () => startRepeat(() => { moveDown(); score += 1; }));
+    btnDown.addEventListener('mouseup', stopRepeat);
+    btnDown.addEventListener('mouseleave', stopRepeat);
+
+    btnRotate.addEventListener('click', () => { if (!gameOver) rotatePiece(); });
+    btnDrop.addEventListener('click', () => { if (!gameOver) hardDrop(); });
+}
+
+setupTouchControls();
+
 // Initialize audio control states from saved settings
 function initAudioControls() {
     const sfxBtn = document.getElementById('sfxToggle');
