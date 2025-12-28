@@ -1,0 +1,216 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.header {
+    text-align: center;
+}
+
+.header h1 {
+    color: #fff;
+    font-size: 2.5rem;
+    text-shadow: 0 0 20px rgba(78, 205, 196, 0.5);
+    margin-bottom: 15px;
+    letter-spacing: 3px;
+}
+
+.score-container {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.score-box {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    min-width: 80px;
+}
+
+.score-box .label {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.score-box span:last-child {
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.game-area {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.next-piece {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.next-piece .label {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+#nextCanvas {
+    border-radius: 5px;
+}
+
+#gameCanvas {
+    border-radius: 5px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.controls-info {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 12px 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.controls-info p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+}
+
+.controls-info strong {
+    color: #4ecdc4;
+}
+
+.game-over {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+}
+
+.game-over-content {
+    background: linear-gradient(135deg, #2a2a40 0%, #1a1a2e 100%);
+    padding: 40px 60px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.game-over-content h2 {
+    color: #ff6b6b;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.game-over-content p {
+    color: #fff;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.game-over-content p span {
+    color: #4ecdc4;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+#restartBtn {
+    margin-top: 20px;
+    background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+    color: #fff;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+#restartBtn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(78, 205, 196, 0.4);
+}
+
+#restartBtn:active {
+    transform: scale(0.98);
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    .header h1 {
+        font-size: 1.8rem;
+    }
+
+    .score-container {
+        gap: 10px;
+    }
+
+    .score-box {
+        padding: 8px 12px;
+        min-width: 60px;
+    }
+
+    .score-box span:last-child {
+        font-size: 1.1rem;
+    }
+
+    .game-area {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    .next-piece {
+        flex-direction: row;
+        gap: 15px;
+    }
+
+    .controls-info {
+        display: none;
+    }
+}

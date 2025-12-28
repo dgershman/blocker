@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Block Blast</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <h1>Block Blast</h1>
+            <div class="score-container">
+                <div class="score-box">
+                    <span class="label">Score</span>
+                    <span id="score">0</span>
+                </div>
+                <div class="score-box">
+                    <span class="label">Level</span>
+                    <span id="level">1</span>
+                </div>
+                <div class="score-box">
+                    <span class="label">Lines</span>
+                    <span id="lines">0</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-area">
+            <div class="next-piece">
+                <span class="label">Next</span>
+                <canvas id="nextCanvas" width="100" height="100"></canvas>
+            </div>
+            <canvas id="gameCanvas"></canvas>
+        </div>
+
+        <div class="controls-info">
+            <p><strong>Controls:</strong> &larr; &rarr; Move | &uarr; Rotate | &darr; Soft Drop | Space Hard Drop</p>
+        </div>
+
+        <div class="game-over" id="gameOver">
+            <div class="game-over-content">
+                <h2>Game Over!</h2>
+                <p>Final Score: <span id="finalScore">0</span></p>
+                <p>Lines Cleared: <span id="finalLines">0</span></p>
+                <button id="restartBtn">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
