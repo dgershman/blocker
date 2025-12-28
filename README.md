@@ -1,4 +1,4 @@
-# Block Blast
+# Blocker
 
 A classic Tetris-style falling block puzzle game built with vanilla JavaScript and HTML5 Canvas.
 
