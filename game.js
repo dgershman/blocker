@@ -185,6 +185,7 @@ function isValidMove(piece, offsetX = 0, offsetY = 0) {
 function moveLeft() {
     if (isValidMove(currentPiece, -1, 0)) {
         currentPiece.x--;
+        audioManager.playSound('move');
     }
 }
 
@@ -192,6 +193,7 @@ function moveLeft() {
 function moveRight() {
     if (isValidMove(currentPiece, 1, 0)) {
         currentPiece.x++;
+        audioManager.playSound('move');
     }
 }
 
@@ -214,6 +216,7 @@ function hardDrop() {
         dropDistance++;
     }
     score += dropDistance * 2;
+    audioManager.playSound('hardDrop');
     lockPiece();
 }
 
@@ -242,8 +245,10 @@ function rotatePiece() {
         // Can't rotate
         else {
             currentPiece.rotateBack();
+            return; // Don't play sound if rotation failed
         }
     }
+    audioManager.playSound('rotate');
 }
 
 // Lock piece in place
@@ -264,6 +269,8 @@ function lockPiece() {
             }
         }
     }
+
+    audioManager.playSound('lock');
 
     // Check for completed lines
     clearLines();
@@ -295,6 +302,9 @@ function clearLines() {
 
     if (linesCleared === 0) return;
 
+    // Play line clear sound
+    audioManager.playSound('lineClear', linesCleared);
+
     // Create particles for cleared lines
     for (const row of linesToClear) {
         for (let col = 0; col < COLS; col++) {
@@ -318,6 +328,7 @@ function clearLines() {
     if (newLevel > level) {
         level = newLevel;
         dropInterval = Math.max(100, 1000 - (level - 1) * 100);
+        audioManager.playSound('levelUp');
     }
 
     updateDisplay();
@@ -359,6 +370,8 @@ function updateParticles(deltaTime) {
 // End the game
 function endGame() {
     gameOver = true;
+    audioManager.playSound('gameOver');
+    audioManager.stopMusic();
     document.getElementById('finalScore').textContent = score;
     document.getElementById('finalLines').textContent = lines;
     document.getElementById('gameOver').style.display = 'flex';
@@ -568,7 +581,44 @@ canvas.addEventListener('touchend', (e) => {
 }, { passive: true });
 
 // Restart button
-document.getElementById('restartBtn').addEventListener('click', init);
+document.getElementById('restartBtn').addEventListener('click', () => {
+    init();
+    audioManager.playSound('gameStart');
+    audioManager.startMusic();
+});
+
+// Audio controls
+document.getElementById('sfxToggle').addEventListener('click', function() {
+    const enabled = audioManager.toggleSFX();
+    this.classList.toggle('active', enabled);
+    this.querySelector('.icon').textContent = enabled ? '🔊' : '🔇';
+});
+
+document.getElementById('musicToggle').addEventListener('click', function() {
+    const enabled = audioManager.toggleMusic();
+    this.classList.toggle('active', enabled);
+    this.querySelector('.icon').textContent = enabled ? '🎶' : '🎵';
+});
+
+document.getElementById('genreSelect').addEventListener('change', function() {
+    audioManager.setGenre(this.value);
+});
+
+// Initialize audio control states from saved settings
+function initAudioControls() {
+    const sfxBtn = document.getElementById('sfxToggle');
+    const musicBtn = document.getElementById('musicToggle');
+    const genreSelect = document.getElementById('genreSelect');
+
+    sfxBtn.classList.toggle('active', audioManager.sfxEnabled);
+    sfxBtn.querySelector('.icon').textContent = audioManager.sfxEnabled ? '🔊' : '🔇';
+
+    musicBtn.classList.toggle('active', audioManager.musicEnabled);
+    musicBtn.querySelector('.icon').textContent = audioManager.musicEnabled ? '🎶' : '🎵';
+
+    genreSelect.value = audioManager.currentGenre;
+}
 
 // Start the game
+initAudioControls();
 init();

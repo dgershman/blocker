@@ -116,6 +116,71 @@ body {
     color: #4ecdc4;
 }
 
+/* Audio Controls */
+.audio-controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.audio-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 8px 14px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    backdrop-filter: blur(10px);
+}
+
+.audio-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.audio-btn.active {
+    background: rgba(78, 205, 196, 0.2);
+    border-color: rgba(78, 205, 196, 0.5);
+    color: #4ecdc4;
+}
+
+.audio-btn .icon {
+    font-size: 1rem;
+}
+
+.genre-select {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.8rem;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.genre-select:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.genre-select:focus {
+    border-color: rgba(78, 205, 196, 0.5);
+}
+
+.genre-select option {
+    background: #1a1a2e;
+    color: #fff;
+}
+
 .game-over {
     display: none;
     position: fixed;
@@ -212,5 +277,14 @@ body {
 
     .controls-info {
         display: none;
+    }
+
+    .audio-controls {
+        flex-wrap: wrap;
+    }
+
+    .audio-btn, .genre-select {
+        padding: 6px 10px;
+        font-size: 0.75rem;
     }
 }
